@@ -9,6 +9,9 @@ export default async function Home() {
     netflixOriginals,
     trendingNow,
     topRated,
+    TrendingTVShows,
+    PopularTVShows,
+    TopRatedTVShows,
     actionMovies,
     comedyMovies,
     horrorMovies,
@@ -18,6 +21,9 @@ export default async function Home() {
     fetch(requests.fetchNetflixOriginals).then((res) => res.json()),
     fetch(requests.fetchTrending).then((res) => res.json()),
     fetch(requests.fetchTopRated).then((res) => res.json()),
+    fetch(requests.TrendingTVShows).then((res) => res.json()),
+    fetch(requests.PopularTVShows).then((res) => res.json()),
+    fetch(requests. TopRatedTVShows).then((res) => res.json()),
     fetch(requests.fetchActionMovies).then((res) => res.json()),
     fetch(requests.fetchComedyMovies).then((res) => res.json()),
     fetch(requests.fetchHorrorMovies).then((res) => res.json()),
@@ -33,6 +39,10 @@ export default async function Home() {
           <Row title="Trending Now" movies={trendingNow} />
           <Row title="Top Rated" movies={topRated} />
           <Row title="Action Thrillers" movies={actionMovies} />
+          <Row title="Trending TV Shows" movies={TrendingTVShows} />
+          <Row title="Popular TV Shows" movies={PopularTVShows} />
+          <Row title="Top Rated TV Shows" movies={TopRatedTVShows} />
+          
           {/* My List Component */}
           {/* {list.length > 0 && <Row title="My List" movies={list} />} */}
           <Row title="Comedies" movies={comedyMovies} />
@@ -41,7 +51,7 @@ export default async function Home() {
           <Row title="Documentaries" movies={documentaries} />
         </section>
       </main>
-      <h1 className="">Chưa làm xong mỗi làm đc giao diện home thôi !!!</h1>
+     
     </>
   );
 }
