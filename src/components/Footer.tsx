@@ -11,7 +11,6 @@ const Footer = () => {
                 <h2 className='text-xl font-semibold text-[#e5e5e5] transition duration-200 hover:text-white hidden md:text-sm  md:block'>
                 Contact me: 
                 </h2>
-
                 <Link className='scale-125 hover:scale-150 ease-in duration-600' href={'https://www.facebook.com/profile.php?id=100063781540097'}>
                 <BsFacebook/>
                 </Link>

@@ -21,11 +21,11 @@ const Banner = ({ netflixOriginals }: Props) => {
     <div className=" flex flex-col space-x-2 py-16 md:space-y-4 md:h-[65vh] lg:justify-end">
       {/* Banner */}
       <div className="absolute top-0 left-0 h-[95vh] -z-10 w-screen">
-        <Image
+        <img
           src={`${baseUrl}${movie?.backdrop_path || movie?.poster_path} `}
           alt={"Picture of the author"}
-          layout="fill"
-          objectFit="cover"
+          // layout="fill"
+          // objectFit="cover"
         />
       </div>
       <h1 className=" text-2xl  lg:text-7xl md:text-4xl">
