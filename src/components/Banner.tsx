@@ -16,7 +16,7 @@ const Banner = ({ netflixOriginals }: Props) => {
   useEffect(() => {
     setMovie(data[Math.floor(Math.random() * data.length)]);
   }, [data]);
-  // console.log(movie);
+  
   return (
     <div className=" flex flex-col space-x-2 py-16 md:space-y-4 md:h-[65vh] lg:justify-end">
       {/* Banner */}

@@ -41,7 +41,7 @@ export default async function Home() {
           <Row title="Documentaries" movies={documentaries} />
         </section>
       </main>
-      <h1 className="">Hello</h1>
+      <h1 className="">Chưa làm xong mỗi làm đc giao diện home thôi !!!</h1>
     </>
   );
 }
