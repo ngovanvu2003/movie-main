@@ -23,7 +23,7 @@ interface MovieProps {
 //     };
 // } ;
 
-const Movies: NextPage<MovieProps> = async ({ params }: any) => {
+const Movies: NextPage = async ({ params }: any) => {
   const movieId = params.movies;
   const data = await getMovieDetails(movieId);
   return (
