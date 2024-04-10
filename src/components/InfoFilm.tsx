@@ -1,6 +1,8 @@
 import React from "react";
 import StarRating from "./StarRating";
 import Link from "next/link";
+import { FaPlay } from "react-icons/fa";
+import { GrCircleInformation } from "react-icons/gr";
 
 type Props = {
   media_type: any;
@@ -10,7 +12,22 @@ type Props = {
 const InfoFilm = ({ media_type, data }: Props) => {
   console.log(data);
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-4 md:gap-2">
+      <div className="flex justify-center md:justify-start space-x-4">
+        <Link href={`/movies/${data.movie?.id}`}>
+          <button className="buttonBanner bg-white text-black">
+            <FaPlay className="h-4 w-4 text-black md:h-4 md:w-4" />
+            Xem ngay
+          </button>
+        </Link>
+        <Link href={`/movies/${data.movie?.id}`}>
+          <button className="buttonBanner bg-[gray]/70 text-black">
+            {" "}
+            <GrCircleInformation className="h-4 w-4 text-black md:h-4 md:w-4" />{" "}
+            Trailer
+          </button>
+        </Link>
+      </div>
       <h3 className="text-white font-semibold text-5xl pb-3">
         {" "}
         {data?.title || data?.name || data?.original_name}
@@ -29,19 +46,11 @@ const InfoFilm = ({ media_type, data }: Props) => {
         )}
       </p>
       <p className="text-base font-light">
-        <span className="text-lg text-justify ">{data.overview}</span>
+        <span className="text-base  md:text-lg text-justify ">
+          {data.overview}
+        </span>
       </p>
-      <div className="text-base font-light ">
-        <span className="font-semibold">Production Companies: </span>
-        <div className="flex gap-5">
-          {data.production_companies.map((item: any) => (
-            <div className="" key={item.id}>
-              <p className="text-[#DB9100]">Name: {item.name}</p>
-              <p>Origin Country: {item.origin_country}</p>
-            </div>
-          ))}
-        </div>
-      </div>
+
       <div className="text-base font-light  ">
         {data.genres && (
           <div className="flex gap-2 flex-wrap">
@@ -68,10 +77,10 @@ const InfoFilm = ({ media_type, data }: Props) => {
       </div>
       <div className="mt-10 ">
         {data.homepage && (
-          <p className="text-xl" style={{ wordBreak: "break-all" }}>
+          <p className="font-semibold" style={{ wordBreak: "break-all" }}>
             Official website:{" "}
             <a
-              className="text-[#DB9100]"
+              className="text-base  md:text-lg text-[#DB9100]"
               href={data.homepage}
               target="_blank"
               rel="noopener noreferrer"

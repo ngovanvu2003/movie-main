@@ -41,22 +41,18 @@ const DetailMovie: NextPage<ItemViewProps> = ({
         className="
     relative
     flex
-    flex-col
     justify-center 
     items-center 
     h-full 
     overflow-y-auto"
       >
-        {/* <div className="absolute top-[20rem] right-8">
-          <Search />
-        </div> */}
-        <div className="w-full h-[700px] ">
+        <div className="w-full h-[100vh] ">
           <Backdrop
             className={`mask-image`}
             image={`${imageOriginal(data?.backdrop_path)}`}
           />
         </div>
-        <div className="absolute left-0 md:pt-5 pt-64 px-6 md:px-20 flex flex-col md:flex-row gap-5 ">
+        <div className="absolute md:pt-0  pt-[25rem] px-6 md:px-20 flex flex-col md:flex-row gap-5 ">
           <div className="md:w-[300px] w-full flex-shrink-0 flex justify-center items-start">
             <Image
               src={imageResize(data?.poster_path, "w300")}
@@ -65,7 +61,7 @@ const DetailMovie: NextPage<ItemViewProps> = ({
               width={300}
               height={100}
               objectFit="cover"
-              className=" rounded-md  transition ease-in-out cursor-pointer"
+              className=" rounded-md w-[260px] md:w-[300px] transition ease-in-out cursor-pointer"
             />
           </div>
           <div className="flex flex-col justify-center lg:justify-start gap-3">
@@ -75,10 +71,21 @@ const DetailMovie: NextPage<ItemViewProps> = ({
 
         {/* <FrameWatchFilm /> */}
       </div>
+
       <div className="pt-4">
         <CastsMovies casts={casts} />
       </div>
-      {/* <EpisodeList /> */}
+      <div className="px-6 md:px-20 ">
+        <h1 className="text-lg py-2">Production Companies</h1>
+        <div className="flex justify-center gap-5">
+          {data.production_companies.map((item: any) => (
+            <div className="text-center" key={item.id}>
+              <p className="text-[#DB9100]"> {item.name}</p>
+              <p> {item.origin_country}</p>
+            </div>
+          ))}
+        </div>
+      </div>
     </>
   );
 };

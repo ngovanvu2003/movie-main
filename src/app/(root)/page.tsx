@@ -1,7 +1,5 @@
-import axios from "axios";
 import Banner from "@/components/Banner";
 import { getMovie } from "@/api/movie";
-import { log } from "console";
 import Row from "@/components/Row";
 
 export default async function Home() {
@@ -19,23 +17,21 @@ export default async function Home() {
     documentaries,
   ] = await getMovie();
   return (
-    <>
-      <main className="relative pl-4 pb-24 lg:space-y-24 lg:pl-16">
-        <Banner netflixOriginals={netflixOriginals} />
-        <section className="md:space-y-24">
-          <Row title="Trending Now" movies={trendingNow} />
-          <Row title="Top Rated" movies={topRated} />
-          <Row title="Action Thrillers" movies={actionMovies} />
-          <Row title="Trending TV Shows" movies={TrendingTVShows} />
-          <Row title="Popular TV Shows" movies={PopularTVShows} />
-          <Row title="Top Rated TV Shows" movies={TopRatedTVShows} />
-          <Row title="Comedies" movies={comedyMovies} />
-          <Row title="Scary Movies" movies={horrorMovies} />
-          <Row title="Romance Movies" movies={romanceMovies} />
-          <Row title="Documentaries" movies={documentaries} />
-        </section>
-      </main>
-    </>
+    <main className="relative pl-4 pb-24 lg:space-y-24 lg:pl-16">
+      <Banner netflixOriginals={netflixOriginals} />
+      <section className="md:space-y-24">
+        <Row title="Trending Now" movies={trendingNow} />
+        <Row title="Top Rated" movies={topRated} />
+        <Row title="Action Thrillers" movies={actionMovies} />
+        <Row title="Trending TV Shows" movies={TrendingTVShows} />
+        <Row title="Popular TV Shows" movies={PopularTVShows} />
+        <Row title="Top Rated TV Shows" movies={TopRatedTVShows} />
+        <Row title="Comedies" movies={comedyMovies} />
+        {/* <Row title="Scary Movies" movies={horrorMovies} /> */}
+        <Row title="Romance Movies" movies={romanceMovies} />
+        <Row title="Documentaries" movies={documentaries} />
+      </section>
+    </main>
   );
 }
 
