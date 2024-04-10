@@ -5,6 +5,7 @@ import { Movie } from "../../typings";
 import { baseUrl } from "@/api/constants";
 import { FaPlay } from "react-icons/fa";
 import { GrCircleInformation } from "react-icons/gr";
+import Link from "next/link";
 
 type Props = {
   netflixOriginals: Movie[] | any;
@@ -12,20 +13,25 @@ type Props = {
 
 const Banner = ({ netflixOriginals }: Props) => {
   const data = netflixOriginals.results;
+
   const [movie, setMovie] = useState<Movie | null>(null);
   useEffect(() => {
     setMovie(data[Math.floor(Math.random() * data.length)]);
   }, [data]);
-  
+  console.log(movie);
   return (
-    <div className=" flex flex-col space-x-2 py-16 md:space-y-4 md:h-[65vh] lg:justify-end">
+    <div className=" flex flex-col space-x-2  py-16 md:space-y-4 md:h-[100vh] lg:justify-end">
       {/* Banner */}
-      <div className="absolute top-0 left-0 h-[95vh] -z-10 w-screen">
-        <img
+      <div className="absolute top-0 left-0 h-[100vh] -z-10 w-screen">
+        <Image
           src={`${baseUrl}${movie?.backdrop_path || movie?.poster_path} `}
           alt={"Picture of the author"}
-          // layout="fill"
-          // objectFit="cover"
+          fill
+          objectFit="cover"
+          style={{
+            transition: "all 0.3s ease 0s",
+            opacity: 0.5,
+          }}
         />
       </div>
       <h1 className=" text-2xl  lg:text-7xl md:text-4xl">
@@ -35,10 +41,13 @@ const Banner = ({ netflixOriginals }: Props) => {
         {movie?.overview}
       </p>
       <div className="flex space-x-4">
-        <button className="buttonBanner bg-white text-black">
-          <FaPlay className="h-4 w-4 text-black md:h-7 md:w-7" />
-          Xem ngay
-        </button>
+        <Link href={`/movies/${movie?.id}`}>
+          <button className="buttonBanner bg-white text-black">
+            <FaPlay className="h-4 w-4 text-black md:h-7 md:w-7" />
+            Xem ngay
+          </button>
+        </Link>
+
         <button className="buttonBanner bg-[gray]/70 text-black">
           {" "}
           <GrCircleInformation className="h-5 w-5 text-black md:h-8 md:w-8" />{" "}

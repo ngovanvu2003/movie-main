@@ -13,7 +13,7 @@ const DarkMode = () => {
       {mount && currenttheme === "dark" ? (
         <MdLightMode
           onClick={() => setTheme("light")}
-          className="text-xl cursor-pointer  hover:text-red-500"
+          className="text-xl cursor-pointer   hover:text-red-500"
         />
       ) : (
         <BsMoonStarsFill

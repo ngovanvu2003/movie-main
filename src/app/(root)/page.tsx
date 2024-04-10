@@ -1,6 +1,6 @@
 import axios from "axios";
 import Banner from "@/components/Banner";
-import requests from "@/api/movie";
+import { getMovie } from "@/api/movie";
 import { log } from "console";
 import Row from "@/components/Row";
 
@@ -17,20 +17,7 @@ export default async function Home() {
     horrorMovies,
     romanceMovies,
     documentaries,
-  ] = await Promise.all([
-    fetch(requests.fetchNetflixOriginals).then((res) => res.json()),
-    fetch(requests.fetchTrending).then((res) => res.json()),
-    fetch(requests.fetchTopRated).then((res) => res.json()),
-    fetch(requests.TrendingTVShows).then((res) => res.json()),
-    fetch(requests.PopularTVShows).then((res) => res.json()),
-    fetch(requests. TopRatedTVShows).then((res) => res.json()),
-    fetch(requests.fetchActionMovies).then((res) => res.json()),
-    fetch(requests.fetchComedyMovies).then((res) => res.json()),
-    fetch(requests.fetchHorrorMovies).then((res) => res.json()),
-    fetch(requests.fetchRomanceMovies).then((res) => res.json()),
-    fetch(requests.fetchDocumentaries).then((res) => res.json()),
-  ]);
-
+  ] = await getMovie();
   return (
     <>
       <main className="relative pl-4 pb-24 lg:space-y-24 lg:pl-16">
@@ -42,16 +29,12 @@ export default async function Home() {
           <Row title="Trending TV Shows" movies={TrendingTVShows} />
           <Row title="Popular TV Shows" movies={PopularTVShows} />
           <Row title="Top Rated TV Shows" movies={TopRatedTVShows} />
-          
-          {/* My List Component */}
-          {/* {list.length > 0 && <Row title="My List" movies={list} />} */}
           <Row title="Comedies" movies={comedyMovies} />
           <Row title="Scary Movies" movies={horrorMovies} />
           <Row title="Romance Movies" movies={romanceMovies} />
           <Row title="Documentaries" movies={documentaries} />
         </section>
       </main>
-     
     </>
   );
 }

@@ -1,37 +1,23 @@
-import Header from '@/components/Header'
-import './globals.css'
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import Providers from './Providers'
-import Footer from '@/components/Footer'
+import "./globals.css";
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 
-const inter = Inter({ subsets: ['latin'] })
-
+const inter = Inter({ subsets: ["latin"] });
+// Import Swiper stylesswiper
+import "swiper/css";
+import "swiper/css/pagination";
 export const metadata: Metadata = {
-  title: 'Movies',
-  description: 'By Ngo Van Vu',
-}
-
+  title: "Movies",
+  description: "By Ngo Van Vu",
+};
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-     <div className='relative h-screen bg-gradient-to-b from-gray-900/10 to-[#010511] lg:h-[140vh]'>
-     {/* <Providers> */}
-      <Header/>
-        <main>
-        {children}
-        </main>
-        {/* </Providers> */}
-        <Footer/>
-     </div>
-      </body>
+      <body className={inter.className}>{children}</body>
     </html>
-  )
+  );
 }
-
-
