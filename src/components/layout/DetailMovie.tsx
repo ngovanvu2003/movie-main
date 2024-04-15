@@ -1,6 +1,5 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { Cast, Detail, Item, VideoTrailer } from "../../../typings";
 import { NextPage } from "next";
 import { baseUrl, imageOriginal, imageResize } from "@/api/constants";
@@ -11,6 +10,7 @@ import Link from "next/link";
 import Backdrop from "@/components/Backdrop";
 import InfoFilm from "../InfoFilm";
 import CastsMovies from "../CastsMovies";
+import Production from "../Production";
 
 interface ItemViewProps {
   props: {
@@ -34,7 +34,7 @@ const DetailMovie: NextPage<ItemViewProps> = ({
   // casts,
   // similar,
   // videos,
-
+  const [trailerModalOpened, setTrailerModalOpened] = useState(false);
   return (
     <>
       <div
@@ -65,26 +65,21 @@ const DetailMovie: NextPage<ItemViewProps> = ({
             />
           </div>
           <div className="flex flex-col justify-center lg:justify-start gap-3">
-            <InfoFilm media_type={media_type} data={data} />
+            <InfoFilm
+              trailerModalOpened={trailerModalOpened}
+              setTrailerModalOpened={setTrailerModalOpened}
+              media_type={media_type}
+              data={data}
+              videos={videos}
+            />
           </div>
         </div>
 
         {/* <FrameWatchFilm /> */}
       </div>
-
+      <Production data={data} />
       <div className="pt-4">
         <CastsMovies casts={casts} />
-      </div>
-      <div className="px-6 md:px-20 ">
-        <h1 className="text-lg py-2">Production Companies</h1>
-        <div className="flex justify-center gap-5">
-          {data.production_companies.map((item: any) => (
-            <div className="text-center" key={item.id}>
-              <p className="text-[#DB9100]"> {item.name}</p>
-              <p> {item.origin_country}</p>
-            </div>
-          ))}
-        </div>
       </div>
     </>
   );

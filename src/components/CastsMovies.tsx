@@ -11,8 +11,10 @@ type Props = {
 
 const CastsMovies = ({ casts }: Props) => {
   return (
-    <div className="px-6 md:px-20">
-      <h1 className="text-lg py-2">Cast</h1>
+    <div className="px-6 md:px-20 ">
+      <h1 className="text-lg py-2">
+        {Array.isArray(casts) && casts.length === 0 ? "" : "Cast"}{" "}
+      </h1>
       <ul>
         <Swiper
           slidesPerView={2}
