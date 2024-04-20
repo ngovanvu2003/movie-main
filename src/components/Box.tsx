@@ -11,10 +11,14 @@ const Box: FC<BoxProps> = ({ children, className }) => {
     <div
       className={twMerge(
         `
-        bg-neutral-900 
-        rounded-lg 
+        fixed
+        z-[99]
+        bg-white
         h-fit 
         w-full
+        bottom-0
+        top-0
+        right-0
         `,
         className
       )}

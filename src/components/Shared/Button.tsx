@@ -10,7 +10,7 @@ const Button: NextPage<ButtonProps & HTMLProps<HTMLButtonElement>> = ({
   className,
   ...others
 }) => {
-  return <button {...others} className={` ${className}`}></button>;
+  return <button {...others} className={`${className}`}></button>;
 };
 
 export default Button;

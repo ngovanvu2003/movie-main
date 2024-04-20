@@ -1,24 +1,25 @@
 import axios from "axios";
+import { instance } from "./config";
 
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
-const BASE_URL = "https://api.themoviedb.org/3";
 const language: string = "en-US";
-// "vi-VI"
-
+const paramMovie = `?api_key=${API_KEY}&language=${language}`;
+const sua = "https://api.themoviedb.org/3";
+// "vi-VI";
 // get movie home
 export const getMovie = async () => {
   const requests = {
-    fetchTrending: `${BASE_URL}/trending/all/week?api_key=${API_KEY}&language=${language}`,
-    fetchNetflixOriginals: `${BASE_URL}/discover/movie?api_key=${API_KEY}&with_networks=213`,
-    fetchTopRated: `${BASE_URL}/movie/top_rated?api_key=${API_KEY}&language=${language}`,
-    TrendingTVShows: `${BASE_URL}/trending/tv/week?api_key=${API_KEY}&language=${language}`,
-    PopularTVShows: `${BASE_URL}/tv/popular?api_key=${API_KEY}&language=${language}`,
-    TopRatedTVShows: `${BASE_URL}/tv/top_rated?api_key=${API_KEY}&language=${language}`,
-    fetchActionMovies: `${BASE_URL}/discover/movie?api_key=${API_KEY}&language=${language}&with_genres=28`,
-    fetchComedyMovies: `${BASE_URL}/discover/movie?api_key=${API_KEY}&language=${language}&with_genres=35`,
-    fetchHorrorMovies: `${BASE_URL}/dziscover/movie?api_key=${API_KEY}&language=${language}&with_genres=27`,
-    fetchRomanceMovies: `${BASE_URL}/discover/movie?api_key=${API_KEY}&language=${language}&with_genres=10749`,
-    fetchDocumentaries: `${BASE_URL}/discover/movie?api_key=${API_KEY}&language=${language}&with_genres=99`,
+    fetchTrending: `${sua}/trending/all/week?api_key=${API_KEY}&language=${language}`,
+    fetchNetflixOriginals: `${sua}/discover/movie?api_key=${API_KEY}&with_networks=213`,
+    fetchTopRated: `${sua}/movie/top_rated?api_key=${API_KEY}&language=${language}`,
+    TrendingTVShows: `${sua}/trending/tv/week?api_key=${API_KEY}&language=${language}`,
+    PopularTVShows: `${sua}/tv/popular?api_key=${API_KEY}&language=${language}`,
+    TopRatedTVShows: `${sua}/tv/top_rated?api_key=${API_KEY}&language=${language}`,
+    fetchActionMovies: `${sua}/discover/movie?api_key=${API_KEY}&language=${language}&with_genres=28`,
+    fetchComedyMovies: `${sua}/discover/movie?api_key=${API_KEY}&language=${language}&with_genres=35`,
+    fetchHorrorMovies: `${sua}/dziscover/movie?api_key=${API_KEY}&language=${language}&with_genres=27`,
+    fetchRomanceMovies: `${sua}/discover/movie?api_key=${API_KEY}&language=${language}&with_genres=10749`,
+    fetchDocumentaries: `${sua}/discover/movie?api_key=${API_KEY}&language=${language}&with_genres=99`,
   };
   const data = await Promise.all([
     fetch(requests.fetchNetflixOriginals).then((res) => res.json()),
@@ -49,18 +50,10 @@ export const getMovieDetails: (id: string) => Promise<any> = async (id) => {
 
   const result = (
     await Promise.all([
-      axios.get(
-        `${BASE_URL}/movie/${id}?api_key=${API_KEY}&language=${language}`
-      ),
-      axios.get(
-        `${BASE_URL}/movie/${id}/credits?api_key=${API_KEY}&language=${language}`
-      ),
-      axios.get(
-        `${BASE_URL}/movie/${id}/similar?api_key=${API_KEY}&language=${language}`
-      ),
-      axios.get(
-        `${BASE_URL}/movie/${id}/videos?api_key=${API_KEY}&language=${language}`
-      ),
+      instance.get(`/movie/${id}${paramMovie}`),
+      instance.get(`/movie/${id}/credits${paramMovie}`),
+      instance.get(`/movie/${id}/similar${paramMovie}`),
+      instance.get(`/movie/${id}/videos${paramMovie}`),
     ])
   ).reduce((final, current, index) => {
     if (labels[index] === "data") {
@@ -80,6 +73,31 @@ export const getMovieDetails: (id: string) => Promise<any> = async (id) => {
       );
     }
 
+    return final;
+  }, {} as any);
+
+  return result;
+};
+
+export const getWatchMovieContent: (id: string) => Promise<any> = async (
+  id
+) => {
+  const labels = ["data", "similar"];
+
+  const result = (
+    await Promise.all([
+      instance.get(`/movie/${id}${paramMovie}`),
+      instance.get(`/movie/${id}/similar${paramMovie}`),
+    ])
+  ).reduce((final, current, index) => {
+    if (labels[index] === "data") {
+      final[labels[index]] = current.data;
+    } else if (labels[index] === "similar") {
+      final[labels[index]] = current.data.results.map((item: any) => ({
+        ...item,
+        media_type: "movie",
+      }));
+    }
     return final;
   }, {} as any);
 

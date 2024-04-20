@@ -42,7 +42,7 @@ const Banner = ({ netflixOriginals }: Props) => {
           {movie?.overview}
         </p>
         <div className="flex space-x-4">
-          <Link href={`/movies/${movie?.id}`}>
+          <Link href={`/watch/${movie?.id}`}>
             <button className="buttonBanner bg-white text-black">
               <FaPlay className="h-3 w-3 text-black md:h-4 md:w-4" />
               Xem ngay

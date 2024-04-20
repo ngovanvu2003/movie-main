@@ -11,6 +11,7 @@ import Backdrop from "@/components/Backdrop";
 import InfoFilm from "../InfoFilm";
 import CastsMovies from "../CastsMovies";
 import Production from "../Production";
+import Meta from "../Shared/Meta";
 
 interface ItemViewProps {
   props: {
@@ -37,6 +38,13 @@ const DetailMovie: NextPage<ItemViewProps> = ({
   const [trailerModalOpened, setTrailerModalOpened] = useState(false);
   return (
     <>
+      <Meta
+        title={
+          media_type == "movie" ? data.title + " - Movie" : data.name + " - TV"
+        }
+        description="Xem Thêm Thông Tin"
+        image={imageOriginal(data.backdrop_path)}
+      />
       <div
         className="
     relative

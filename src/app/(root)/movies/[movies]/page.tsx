@@ -28,9 +28,7 @@ const Movies: NextPage = async ({ params }: any) => {
   const data = await getMovieDetails(movieId);
   return (
     <>
-      <div>
-        <DetailMovie {...data} media_type="movie" />
-      </div>
+      <DetailMovie {...data} media_type="movie" />
     </>
   );
 };

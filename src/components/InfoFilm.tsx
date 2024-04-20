@@ -1,3 +1,4 @@
+"use client";
 import React, { Fragment } from "react";
 import StarRating from "./StarRating";
 import Link from "next/link";
@@ -20,11 +21,10 @@ const InfoFilm = ({
   data,
   videos,
 }: Props) => {
-  console.log(data);
   return (
     <div className="flex flex-col gap-4 md:gap-3">
       <div className="order-none  md:order-last flex justify-center md:justify-start space-x-4">
-        <Link href={`/movies/${data.movie?.id}`}>
+        <Link href={`/watch/${data?.id}`}>
           <button className="buttonBanner bg-white text-black">
             <FaPlay className="h-[14px] w-[14px] text-black md:h-4 md:w-4" />
             Xem ngay
@@ -40,7 +40,10 @@ const InfoFilm = ({
         {videos?.length > 0 && (
           <Button
             className="buttonBanner bg-[gray]/70 text-black"
-            onClick={() => setTrailerModalOpened(true)}
+            onClick={(): any => {
+              document.body.classList.add("hiddenoverflow");
+              setTrailerModalOpened(true);
+            }}
           >
             <FaYoutube className="h-[14px] w-[14px] text-black md:h-4 md:w-4" />
             <span>Xem Trailer</span>
@@ -110,7 +113,10 @@ const InfoFilm = ({
       </div>
       {trailerModalOpened && (
         <div
-          onClick={() => setTrailerModalOpened(false)}
+          onClick={() => {
+            document.body.classList.remove("hiddenoverflow");
+            setTrailerModalOpened(false);
+          }}
           className="fixed top-0 left-0 z-[60] w-screen h-screen flex justify-center items-center bg-[#2a2a2a80]"
         >
           <div
@@ -121,7 +127,10 @@ const InfoFilm = ({
               <h1 className="text-2xl ml-2">Trailer Phim</h1>
               <button
                 className="cursor-pointer"
-                onClick={() => setTrailerModalOpened(false)}
+                onClick={() => {
+                  document.body.classList.remove("hiddenoverflow");
+                  setTrailerModalOpened(false);
+                }}
               >
                 <FaTimes size={30} />
               </button>
