@@ -13,12 +13,12 @@ type Props = {
 };
 
 const Banner = ({ netflixOriginals }: Props) => {
-  const data = netflixOriginals.results;
-
   const [movie, setMovie] = useState<Movie | null>(null);
   useEffect(() => {
-    setMovie(data[Math.floor(Math.random() * data.length)]);
-  }, [data]);
+    setMovie(
+      netflixOriginals[Math.floor(Math.random() * netflixOriginals.length)]
+    );
+  }, [netflixOriginals]);
   return (
     <div className="flex">
       <div className=" flex flex-1  flex-col gap-4 space-x-2 py-16 md:space-y-4 md:h-[100vh] lg:justify-center">

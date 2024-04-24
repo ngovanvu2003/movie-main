@@ -9,7 +9,7 @@ type Props = {
   movies: Movie[] | any;
 };
 const Row = ({ title, movies }: Props) => {
-  const data = movies?.results;
+  console.log(movies);
   const rowRef = useRef<HTMLDivElement>(null);
   const [isMoved, setIsMoved] = useState(false);
   const handleClick = (direction: string) => {
@@ -45,7 +45,7 @@ const Row = ({ title, movies }: Props) => {
           ref={rowRef}
           className="flex items-center space-x-0.5 overflow-x-scroll scrollbar-hide md:space-x-2.5 md:p-2"
         >
-          {data?.map((movie: any) => (
+          {movies?.map((movie: any) => (
             <Thumbnail key={movie.id} movie={movie} />
           ))}
         </div>
