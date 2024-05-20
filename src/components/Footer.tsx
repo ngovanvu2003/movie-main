@@ -5,7 +5,7 @@ import Link from "next/link";
 const Footer = () => {
   return (
     <div>
-      <div className="relative bottom-0   flex w-full items-center justify-between  px-4 py-4 transition-all lg:px-10 lg:py-6">
+      <div className="fixed bottom-0   flex w-full items-center justify-between  px-4 py-4 transition-all lg:px-10 lg:py-6">
         <h2 className="w-64 text-xl font-semibold text-[#e5e5e5] transition duration-200 hover:text-white md:text-sm">
           Vu. © 2023
         </h2>

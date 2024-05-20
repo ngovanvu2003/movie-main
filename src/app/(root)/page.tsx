@@ -15,7 +15,6 @@ async function getData() {
       revalidate: 3600,
     };
   } catch (error) {
-    console.log(error);
     return {
       notFound: true,
       revalidate: true,
@@ -24,7 +23,7 @@ async function getData() {
 }
 export default async function Home() {
   const data: any = await getData();
-  console.log(data.props.data["TopTrending"]);
+
   return (
     <main className="relative pl-4 pb-24 lg:space-y-24 lg:pl-16">
       <Banner netflixOriginals={data.props.data["NetflixOriginals"]} />

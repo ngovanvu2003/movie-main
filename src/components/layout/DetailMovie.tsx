@@ -2,16 +2,14 @@
 import React, { useState } from "react";
 import { Cast, Detail, Item, VideoTrailer } from "../../../typings";
 import { NextPage } from "next";
-import { baseUrl, imageOriginal, imageResize } from "@/api/constants";
+import { imageOriginal, imageResize } from "@/api/constants";
 import Image from "next/image";
-import { GrCircleInformation } from "react-icons/gr";
-import { FaPlay } from "react-icons/fa";
-import Link from "next/link";
 import Backdrop from "@/components/Backdrop";
 import InfoFilm from "../InfoFilm";
 import CastsMovies from "../CastsMovies";
 import Production from "../Production";
 import Meta from "../Shared/Meta";
+import EpisodeItem from "../EpisodeItem";
 
 interface ItemViewProps {
   props: {
@@ -28,14 +26,20 @@ const DetailMovie: NextPage<ItemViewProps> = ({
   similar,
   videos,
   media_type,
+  seasons,
 }: any) => {
-  // data cần lấy
-  // media_type,
-  // data,
-  // casts,
-  // similar,
-  // videos,
   const [trailerModalOpened, setTrailerModalOpened] = useState(false);
+  const active = [
+    {
+      name: "Episode",
+      id: "Episode",
+    },
+    {
+      name: "Information",
+      id: "Information",
+    },
+  ];
+  const [opened, setOpened] = useState<string | undefined>("Episode");
   return (
     <>
       <Meta
@@ -54,13 +58,13 @@ const DetailMovie: NextPage<ItemViewProps> = ({
     h-full 
     overflow-y-auto"
       >
-        <div className="w-full h-[100vh] ">
+        <div className="w-full h-[80vh] ">
           <Backdrop
             className={`mask-image`}
             image={`${imageOriginal(data?.backdrop_path)}`}
           />
         </div>
-        <div className="absolute md:pt-0  pt-[25rem] px-6 md:px-20 flex flex-col md:flex-row gap-5 ">
+        <div className="absolute md:pt-0 left-0 pt-[25rem] px-6 md:px-20 flex flex-col md:flex-row gap-5 ">
           <div className="md:w-[300px] w-full flex-shrink-0 flex justify-center items-start">
             <Image
               src={imageResize(data?.poster_path, "w300")}
@@ -84,11 +88,44 @@ const DetailMovie: NextPage<ItemViewProps> = ({
         </div>
 
         {/* <FrameWatchFilm /> */}
+      </div>{" "}
+      <div id="episode" className="px-6 md:px-20">
+        {media_type == "tv" ? (
+          <div>
+            <div className="flex justify-start gap-5 py-3">
+              {active.map((item: any, index: any) => (
+                <>
+                  <h1
+                    className={`${
+                      item.name == opened ? "bg-[gray]/70 hover:text-black" : ""
+                    } " text-lg border-2 px-3 py-2 border-white rounded-full hover:bg-[gray]/70 hover:text-black"`}
+                    onClick={() => setOpened(item.name)}
+                  >
+                    {item.name}
+                  </h1>
+                </>
+              ))}
+            </div>
+            {opened == "Episode" ? (
+              <div className="flex flex-col gap-3 h-[500px]  mt-2 ">
+                {seasons.map((item: any, index: any) => (
+                  <div key={index}>
+                    <EpisodeItem data={item} />{" "}
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <CastsMovies casts={casts} />
+            )}
+          </div>
+        ) : (
+          <CastsMovies casts={casts} />
+        )}
       </div>
-      <Production data={data} />
-      <div className="pt-4">
-        <CastsMovies casts={casts} />
-      </div>
+      {/* <Production data={data} /> */}
+      {/* <div className="px-6 md:px-20">
+        <Row title="Liên quan" movies={similar} />
+      </div> */}
     </>
   );
 };

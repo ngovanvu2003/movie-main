@@ -22,6 +22,10 @@
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 .mask-image {
   mask-image: linear-gradient(rgba(0, 0, 0, 1), transparent);
 }
@@ -46,4 +50,8 @@
 
 .hiddenoverflow {
   overflow: hidden;
+}
+
+#lktq {
+  display: none;
 }

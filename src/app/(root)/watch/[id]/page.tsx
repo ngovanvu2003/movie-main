@@ -20,31 +20,4 @@ const WatchMovie = async ({ params }: any) => {
   );
 };
 
-// export const getStaticProps: GetStaticProps = async () => {
-//   try {
-//     const id = params?.id as string;
-//     const response = await getWatchMovieContent(id);
-
-//     return {
-//       props: {
-//         ...response,
-//       },
-//       revalidate: 3600,
-//     };
-//   } catch (error) {
-//     console.log(error);
-//     return {
-//       notFound: true,
-//       revalidate: true,
-//     };
-//   }
-// };
-
-// export const getStaticPaths: GetStaticPaths = async () => {
-//   return {
-//     paths: [],
-//     fallback: "blocking",
-//   };
-// };
-
 export default WatchMovie;

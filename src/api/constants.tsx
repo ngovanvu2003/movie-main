@@ -9,4 +9,4 @@ export const embedMovie = (id: number | string) =>
   `https://2embed.cc/embed/${id}`;
 
 export const embedEpisode = (id: number, season: number, episode: number) =>
-  `https://2embed.cc/embed/series?tmdb=${id}&sea=${season}&epi=${episode}`;
+  `https://www.2embed.cc/embedtv/${id}&s=${season}&e=${episode}`;

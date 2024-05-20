@@ -5,6 +5,7 @@ import Link from "next/link";
 import { FaPlay, FaTimes, FaYoutube } from "react-icons/fa";
 import { GrCircleInformation } from "react-icons/gr";
 import Button from "./Shared/Button";
+import Production from "./Production";
 
 type Props = {
   media_type: any;
@@ -24,12 +25,20 @@ const InfoFilm = ({
   return (
     <div className="flex flex-col gap-4 md:gap-3">
       <div className="order-none  md:order-last flex justify-center md:justify-start space-x-4">
-        <Link href={`/watch/${data?.id}`}>
-          <button className="buttonBanner bg-white text-black">
-            <FaPlay className="h-[14px] w-[14px] text-black md:h-4 md:w-4" />
-            Xem ngay
-          </button>
-        </Link>
+        {media_type == "tv" ? (
+          <>
+            <a className="buttonBanner bg-white text-black" href="#episode">
+              Episode
+            </a>
+          </>
+        ) : (
+          <Link href={`/watch/${data?.id}`}>
+            <button className="buttonBanner bg-white text-black">
+              <FaPlay className="h-[14px] w-[14px] text-black md:h-4 md:w-4" />
+              Xem ngay
+            </button>
+          </Link>
+        )}
         {/* <Link href={`/movies/${data.movie?.id}`}>
           <button className="">
             {" "}
@@ -46,7 +55,7 @@ const InfoFilm = ({
             }}
           >
             <FaYoutube className="h-[14px] w-[14px] text-black md:h-4 md:w-4" />
-            <span>Xem Trailer</span>
+            <span> Trailer</span>
           </Button>
         )}
       </div>
@@ -75,8 +84,8 @@ const InfoFilm = ({
       <div className="text-base font-light  ">
         {data.genres && (
           <div className="flex gap-2 flex-wrap">
-            {data.genres.map((item: any) => (
-              <Link href="" key={item.id} legacyBehavior>
+            {data.genres.map((item: any,index:any) => (
+              <Link  href="" key={index} legacyBehavior>
                 <a className="bg-dark-lighten border border-white px-3 py-1 rounded-full whitespace-nowrap text-white">
                   {item.name}
                 </a>

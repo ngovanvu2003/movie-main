@@ -5,7 +5,6 @@ import { Detail } from "../../typings";
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 const language: string = "en-US";
 const paramMovie = `?api_key=${API_KEY}&language=${language}`;
-const sua = "https://api.themoviedb.org/3";
 // "vi-VI";
 // get movie home
 export const getMovie: () => Promise<any> = async () => {
@@ -119,15 +118,18 @@ export const getMovie: () => Promise<any> = async () => {
 // }
 
 // get detail movie
-export const getMovieDetails: (id: string) => Promise<any> = async (id) => {
+export const getMovieDetails: (
+  id: string,
+  category: string
+) => Promise<any> = async (id, category) => {
   const labels = ["data", "casts", "similar", "videos"];
 
   const result = (
     await Promise.all([
-      instance.get(`/movie/${id}${paramMovie}`),
-      instance.get(`/movie/${id}/credits${paramMovie}`),
-      instance.get(`/movie/${id}/similar${paramMovie}`),
-      instance.get(`/movie/${id}/videos${paramMovie}`),
+      instance.get(`/${category}/${id}${paramMovie}`),
+      instance.get(`/${category}/${id}/credits${paramMovie}`),
+      instance.get(`/${category}/${id}/similar${paramMovie}`),
+      instance.get(`/${category}/${id}/videos${paramMovie}`),
     ])
   ).reduce((final, current, index) => {
     if (labels[index] === "data") {

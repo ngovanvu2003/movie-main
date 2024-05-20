@@ -11,8 +11,8 @@ type Props = {
 
 const CastsMovies = ({ casts }: Props) => {
   return (
-    <div className="px-6 md:px-20 ">
-      <h1 className="text-lg py-2">
+    <div className="">
+      <h1 className="w-64 py-3 cursor-pointer text-sm font-semibold text-[#e5e5e5] transition duration-200 hover:text-white md:text-2xl">
         {Array.isArray(casts) && casts.length === 0 ? "" : "Cast"}{" "}
       </h1>
       <ul>

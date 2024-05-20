@@ -12,23 +12,13 @@ interface MovieProps {
   videos: VideoTrailer[];
 }
 
-// const getStaticProps: GetStaticProps | Promise<void> = async () => {
-//   console.log(movieId)
-//     const response = await getMovieDetails(movieId);
-//     return {
-//         props: {
-//             ...response,
-//         },
-//         revalidate: 3600,
-//     };
-// } ;
-
 const Movies: NextPage = async ({ params }: any) => {
   const movieId = params.movies;
-  const data = await getMovieDetails(movieId);
+  const media_type = "movie";
+  const data = await getMovieDetails(movieId, media_type);
   return (
     <>
-      <DetailMovie {...data} media_type="movie" />
+      <DetailMovie {...data} media_type={media_type} />
     </>
   );
 };
