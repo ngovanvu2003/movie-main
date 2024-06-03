@@ -29,7 +29,12 @@ const TVEpisode: NextPage = async ({ params }: any) => {
     seasons: Season[];
   };
   return (
-    <DetailMovie {...data} seasons={response.seasons} media_type={media_type} />
+    <DetailMovie
+      {...data}
+      seasons={response.seasons}
+      media_type={media_type}
+      id={id}
+    />
   );
 };
 

@@ -16,7 +16,6 @@ interface WatchMovieProps {
 }
 
 const WatchLayout: NextPage<WatchMovieProps> = ({ data, similar }) => {
-  const loadHIHI = loadingFunction();
   return (
     <>
       <Meta

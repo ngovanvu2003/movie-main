@@ -27,6 +27,7 @@ const DetailMovie: NextPage<ItemViewProps> = ({
   videos,
   media_type,
   seasons,
+  id,
 }: any) => {
   const [trailerModalOpened, setTrailerModalOpened] = useState(false);
   const active = [
@@ -39,6 +40,7 @@ const DetailMovie: NextPage<ItemViewProps> = ({
       id: "Information",
     },
   ];
+  console.log(id);
   const [opened, setOpened] = useState<string | undefined>("Episode");
   return (
     <>
@@ -69,10 +71,8 @@ const DetailMovie: NextPage<ItemViewProps> = ({
             <Image
               src={imageResize(data?.poster_path, "w300")}
               alt="Mountains"
-              sizes="100vw"
               width={300}
               height={100}
-              objectFit="cover"
               className=" rounded-md w-[260px] md:w-[300px] transition ease-in-out cursor-pointer"
             />
           </div>
@@ -94,7 +94,7 @@ const DetailMovie: NextPage<ItemViewProps> = ({
           <div>
             <div className="flex justify-start gap-5 py-3">
               {active.map((item: any, index: any) => (
-                <>
+                <div key={index}>
                   <h1
                     className={`${
                       item.name == opened ? "bg-[gray]/70 hover:text-black" : ""
@@ -103,14 +103,14 @@ const DetailMovie: NextPage<ItemViewProps> = ({
                   >
                     {item.name}
                   </h1>
-                </>
+                </div>
               ))}
             </div>
             {opened == "Episode" ? (
               <div className="flex flex-col gap-3 h-[500px]  mt-2 ">
                 {seasons.map((item: any, index: any) => (
                   <div key={index}>
-                    <EpisodeItem data={item} />{" "}
+                    <EpisodeItem data={item} id={id} />{" "}
                   </div>
                 ))}
               </div>

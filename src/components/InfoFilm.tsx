@@ -84,8 +84,8 @@ const InfoFilm = ({
       <div className="text-base font-light  ">
         {data.genres && (
           <div className="flex gap-2 flex-wrap">
-            {data.genres.map((item: any,index:any) => (
-              <Link  href="" key={index} legacyBehavior>
+            {data.genres.map((item: any, index: any) => (
+              <Link href="" key={index} legacyBehavior>
                 <a className="bg-dark-lighten border border-white px-3 py-1 rounded-full whitespace-nowrap text-white">
                   {item.name}
                 </a>

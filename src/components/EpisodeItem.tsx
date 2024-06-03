@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import React, { useState } from "react";
 Overview;
@@ -6,9 +7,8 @@ import Overview from "./Overview";
 import { imageResize } from "@/api/constants";
 import Link from "next/link";
 
-const Episodedata = ({ data, params }: any) => {
+const Episodedata = ({ data, id, xs }: any) => {
   const [opened, setOpened] = useState<number | undefined>();
-  console.log(data);
   return (
     <>
       <div
@@ -60,10 +60,10 @@ const Episodedata = ({ data, params }: any) => {
         </div>
       </div>
       {opened === data.season_number && (
-        <div className="flex flex-col gap-4 overflow-hidden mt-4 ">
+        <div className="flex flex-col gap-4 overflow-hidden mt-4 overflow-y-auto h-[60vh]">
           {data.episodes.map((child: any, index: any) => (
             <Link
-              href={`${data.id}/watch/${child?.season_number}/${index + 1}`}
+              href={`/tivi/${id}/watch/${child?.season_number}/${index + 1}`}
               className="bg-[#4B4B4B]/[40%] ml-5 rounded"
               key={index}
             >
@@ -81,10 +81,17 @@ const Episodedata = ({ data, params }: any) => {
                   height={100}
                   alt=""
                 />
-                <div className="flex-grow">
-                  <h1>{child.name}</h1>
-                  <p className="text-gray-400">{child.air_date}</p>
-                </div>
+                {xs ? (
+                  <></>
+                ) : (
+                  <>
+                    {" "}
+                    <div className="flex-grow">
+                      <h1>{child.name}</h1>
+                      <p className="text-gray-400">{child.air_date}</p>
+                    </div>
+                  </>
+                )}
               </div>
             </Link>
           ))}

@@ -10,7 +10,7 @@ type Props = {
 const Trailer: FC<Props> = ({ href }) => {
   return (
     <Link
-      href="ádas"
+      href="/"
       className="
       relative
       group
